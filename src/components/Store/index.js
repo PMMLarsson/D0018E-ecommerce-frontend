@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks';
 import { GET_ASSETS } from '../../queries/'
+import Emoji from './emoji'
 
 const Store = () => {
   const { data, loading, error } = useQuery(GET_ASSETS);
@@ -9,23 +10,13 @@ const Store = () => {
     return(<p>Error when fetching store items.</p>)
   }
   return(
-    <>
-      <h1>Available Emojis.</h1>
-        <table>
-          <tr>
-            <th>Emoji</th>
-            <th>Cost</th>
-            <th>Description</th>
-          </tr>
-        {data.assets && data.assets.map((asset) => 
-          <tr>
-            <td>{asset.type}</td>
-            <td>{asset.cost} {asset.currency}</td>
-            <td>{asset.description}</td>
-          </tr>
-        )}
-     </table> 
-    </>
+    <div style={{display:"flex", flexWrap: "wrap"}}>
+      {data.assets && data.assets.map(asset => {
+        return(
+          <Emoji asset={asset} key={asset.type}/>
+        )
+      })}
+    </div>
   )
 }
 
