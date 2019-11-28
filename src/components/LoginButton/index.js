@@ -8,7 +8,7 @@ import { Modal,
   FormGroup, 
   Input,
   Label } from 'reactstrap'
-  import { ApolloConsumer } from "@apollo/react-hooks"
+
 
   import { LOGIN } from '../../queries'
 
@@ -25,8 +25,9 @@ const LoginButton = (props) => {
     .then(({data}) => {
       alert(data.login.message)
       localStorage.setItem("loggedIn", data.login.id)
-      props.setLoggedIn(data.login.id)
+      props.handleChange(data.login.id)
       toggleModal(!modal)
+      window.location.reload()
     })
     .catch(error => {
       alert(error)
@@ -35,9 +36,7 @@ const LoginButton = (props) => {
 
 
   return(
-    <ApolloConsumer>
-      {client => (
-        <>
+    <>
       <Button
         className="ml-2"
         size="lg"
@@ -66,7 +65,7 @@ const LoginButton = (props) => {
         <ModalFooter>
           <Button
             style={{backgroundColor:"#745A89"}}
-            onClick={() => login(client, email)}
+            onClick={() => login(props.client, email)}
           >
             <strong>Login</strong>
           </Button>
@@ -75,9 +74,7 @@ const LoginButton = (props) => {
           </Button>
         </ModalFooter>
       </Modal>
-      </>
-      )}
-    </ApolloConsumer>
+    </>
   )
 }
 
