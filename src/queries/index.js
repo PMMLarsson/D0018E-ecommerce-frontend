@@ -21,11 +21,34 @@ export const GET_ASSETS = gql`
   }
 `
 
+export const GET_ASSET_BY_TYPE = gql`
+  query assetByType($type: String!) {
+    assetByType(type: $type) {
+      type
+      amount
+      cost
+      currency
+      description
+    }
+  }
+`
+
 export const LOGIN = gql`
   query login($email:String!) {
     login(email:$email) {
       id
       message
+    }
+  }
+`
+
+export const GET_CUSTOMER = gql`
+  query getCustomer($id: ID!) {
+    getCustomer(id: $id) {
+      id
+      fname
+      lname
+      email
     }
   }
 `
@@ -48,12 +71,13 @@ export const COMMENTS = gql`
       date
       contents
       upvotes
+      by_name
     }
   }
 `
 
 export const GRADE = gql`
-  query grade($asset_type: String) {
+  query grade($asset_type: String!) {
     grade(asset_type: $asset_type)
   }
 `
@@ -88,8 +112,8 @@ export const CREATE_ORDER = gql`
 `
 
 export const ADD_COMMENT = gql`
-  mutation addComment($asset_type: String!, $customer_id: ID!, $contents: String) {
-    addComment(asset_type: $asset_type, customer_id: $customer_id, contents: $contents) {
+  mutation addComment($asset_type: String!, $customer_id: ID!, $contents: String, $by_name: String) {
+    addComment(asset_type: $asset_type, customer_id: $customer_id, contents: $contents, by_name: $by_name) {
       success
       message
     }
@@ -114,18 +138,9 @@ export const DELETE_COMMENT = gql`
   }
 `
 
-export const ADD_GRADE = gql`
-  mutation addGrade($asset_type: String, $customer_id: ID!, $grade: Int) {
-    addGrade(asset_type: $asset_type, customer_id: $customer_id, grade: $grade) {
-      success
-      message
-    }
-  }
-`
-
-export const EDIT_GRADE = gql`
-  mutation editGrade($asset_type: String, $customer_id: ID!, $grade: Int) {
-    editGrade(asset_type: $asset_type, customer_id: $customer_id, grade: $grade) {
+export const UPDATE_GRADE = gql`
+  mutation updateGrade($asset_type: String!, $customer_id: ID!, $grade: Int) {
+    updateGrade(asset_type: $asset_type, customer_id: $customer_id, grade: $grade) {
       success
       message
     }
@@ -145,6 +160,34 @@ export const CLEAR_CART = gql`
     clearCart(customer_id: $customer_id) {
       success
       message
+    }
+  }
+`
+
+export const SINGLE_EMOJI_QUERY = gql`
+  query singleEmojiQuery($type: String!, $customer_id: ID!) {
+    assetByType(type: $type) {
+      type
+      amount
+      cost
+      currency
+      description
+    }
+    grade(asset_type: $type)
+    comments(asset_type: $type) {
+      id
+      customer_id
+      asset_type
+      date
+      contents
+      upvotes
+      by_name
+    }
+    getCustomer(id: $customer_id) {
+      id
+      fname
+      lname
+      email
     }
   }
 `

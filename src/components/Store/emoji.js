@@ -3,6 +3,7 @@ import { Button, Input } from "reactstrap"
 
 import { EMOJIS } from '../enums'
 import { useMutation } from "@apollo/react-hooks"
+import { Link } from "gatsby"
 import { UPDATE_CART, CART_SIZE, CART } from "../../queries"
 import { updateCartObject } from "../../utils"
 
@@ -26,7 +27,9 @@ const Emoji = ({ asset, cart }) => {
 
   return(
     <div style={{width:"30%", padding:"1rem"}}>
-      <p style={{fontSize:"5rem", textAlign:"center"}}>{EMOJIS[asset.type]}</p>
+      <Link style={{textDecoration:"none"}} to={`/emoji?type=${asset.type}`} state={{type: asset.type}}>
+        <p style={{fontSize:"5rem", textAlign:"center"}}>{EMOJIS[asset.type]}</p>
+      </Link>
       <div style={{display:"flex"}}>
         <Input type="select" name="select" style={{minWidth:"20%"}} value={amountToAdd} onChange={(e) => setAmountToAdd(e.target.value)}>
           <option>1</option>

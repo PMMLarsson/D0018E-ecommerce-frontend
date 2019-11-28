@@ -5,7 +5,7 @@ import Emoji from './emoji'
 
 export const Contents = () => {
   const assets = useQuery(GET_ASSETS)
-  const cart = useQuery(CART, { variables:{ customer_id:localStorage.getItem("loggedIn") } });
+  const cart = useQuery(CART, { variables:{ customer_id:localStorage.getItem("loggedIn") } })
   
   return(
     <div style={{display:"flex", flexWrap: "wrap"}}>

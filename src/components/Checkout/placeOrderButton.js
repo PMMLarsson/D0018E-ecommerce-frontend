@@ -10,10 +10,6 @@ export const PlaceOrderButton = ({ validOrder, contents, total_cost, currency })
     placeOrder()
   }
 
- /*  console.log(localStorage.getItem("loggedIn"))
-  console.log(total_cost)
-  console.log(currency) */
-
   // Create a cart object
   const metadata = contents.map(content => {
     return { asset_type: content.asset_type, amount: content.amount}

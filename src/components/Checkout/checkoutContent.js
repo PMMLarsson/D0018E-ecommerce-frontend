@@ -40,7 +40,7 @@ export const CheckoutContent = () => {
             </tr>
           </thead>
           <tbody>
-        {cart.data.cart.contents[0].asset_type && cart.data.cart.contents.map(content => {
+        {cart.data.cart.contents[0] && cart.data.cart.contents[0].asset_type && cart.data.cart.contents.map(content => {
           const [{ cost, currency }] = assets.data.assets.filter(asset => asset.type === content.asset_type)
           const total_cost = cost * content.amount
           order_cost = order_cost + total_cost
