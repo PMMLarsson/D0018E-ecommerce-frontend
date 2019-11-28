@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { Contents } from "./contents"
+import CheckoutContent from './checkoutContent'
 
-const Store = () => {
+const Checkout = () => {
   const [ loggedIn ] = useState(localStorage.getItem("loggedIn") || undefined)
   
-
   useEffect(() => {
     localStorage.setItem('loggedIn', loggedIn);
   }, [loggedIn]);
@@ -13,11 +12,11 @@ const Store = () => {
   return (
     <>
       { !localStorage.getItem("loggedIn") || localStorage.getItem("loggedIn") === "undefined" ?
-        <p>Log in to view store.</p>
-        : <Contents/>
+        <p>Log in to view checkout.</p>
+        : <CheckoutContent/>
       }
     </>
   )
 }
 
-export default Store
+export default Checkout

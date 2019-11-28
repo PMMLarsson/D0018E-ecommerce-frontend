@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { Button } from 'reactstrap'
+import { ApolloConsumer } from '@apollo/react-hooks'
 
 import headerStyles from './header.module.scss'
 import LoginButton from "./LoginButton"
 import SignUpButton from "./SignUpButton"
 import LogoutButton from "./LogoutButton"
+import CartButton from "./CartButton"
 
 const Header = () => {
-  const [ loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") || undefined)
+  const [ loggedIn, setLoggedIn ] = useState(localStorage.getItem("loggedIn") || undefined)
+  
 
   React.useEffect(() => {
     localStorage.setItem('loggedIn', loggedIn);
   }, [loggedIn]);
 
-  const data = useStaticQuery(graphql`
+  const siteData = useStaticQuery(graphql`
     query {
       site {
         siteMetadata {
@@ -25,11 +28,13 @@ const Header = () => {
   `)
 
   return (
+    <ApolloConsumer>
+      {client => (
     <header className={headerStyles.header}>
       <div style={{display:'flex', alignItems:'center'}}>
         <h1>
           <Link className={headerStyles.title} to="/">
-            {data.site.siteMetadata.title}
+            {siteData.site.siteMetadata.title}
           </Link>
         </h1>
         <div style={{marginRight: "0", marginLeft: "auto"}}>
@@ -40,16 +45,19 @@ const Header = () => {
             </Button>
             {!loggedIn || loggedIn === "undefined" ?
               <>
-                <LoginButton className={headerStyles.sideItems} setLoggedIn={setLoggedIn}/>
-                <SignUpButton className={headerStyles.sideItems} setLoggedIn={setLoggedIn}/>
+                <LoginButton className={headerStyles.sideItems} client={client} handleChange={(customer_id) => {
+                  setLoggedIn(customer_id)
+                  }}/>
+                <SignUpButton className={headerStyles.sideItems} client={client} handleChange={(customer_id) => {
+                  setLoggedIn(customer_id)
+                  }}/>
               </>
-              : <LogoutButton className={headerStyles.sideItems} setLoggedIn={setLoggedIn}/>}
-            <Link to="/check-out" className={headerStyles.sideItems}>
-              <Button size="lg" style={{backgroundColor:"#745A89"}} title="Check out">
-                45<span role="img" aria-label="Shopping Cart">🛒</span>
-              </Button>
-            </Link>
-
+              :
+              <> 
+                <LogoutButton className={headerStyles.sideItems} setLoggedIn={setLoggedIn}/>
+                <CartButton className={headerStyles.sideItems} customer_id={loggedIn}/>
+              </>
+              }
         </div>
       </div>
       <div className="theme-background-color">
@@ -65,6 +73,8 @@ const Header = () => {
         </nav>
       </div>
     </header>
+    )}
+    </ApolloConsumer>
   )
 }
 

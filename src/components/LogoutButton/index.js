@@ -6,6 +6,7 @@ const LogoutButton = (props) => {
     if(window.confirm("Are you sure you want to logout?")) {
       localStorage.clear()
       props.setLoggedIn(undefined)
+      window.location.reload()
     }
   }
 

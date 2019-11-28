@@ -38,8 +38,8 @@ const SignUpButton = (props) => {
  const [createCustomer] = useMutation(CREATE_CUSTOMER, {
   variables: { fname, lname, email },
   onCompleted: result => {
-    props.setLoggedIn(result.createCustomer.id)
     alert(result.createCustomer.message)
+    props.handleChange(result.createCustomer.id)
     toggleModal(!modal)
   },
 })
