@@ -193,3 +193,25 @@ export const SINGLE_EMOJI_QUERY = gql`
     }
   }
 `
+
+export const PROFILE_PAGE_QUERY = gql`
+query profilePage($id: ID!) {
+  getCustomer(id: $id) {
+    id
+    fname
+    lname
+    email
+  }
+  orders(id: $id) {
+    id
+    buyer
+    metadata {
+      asset_type
+      amount
+    }
+    date
+    total_cost
+    currency
+  }
+}
+`

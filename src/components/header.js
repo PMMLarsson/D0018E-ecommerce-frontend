@@ -37,7 +37,7 @@ const Header = () => {
             {siteData.site.siteMetadata.title}
           </Link>
         </h1>
-        <div style={{marginRight: "0", marginLeft: "auto"}}>
+        <div style={{marginRight: "0", marginLeft: "auto", display: "flex"}}>
             <Button size="lg"  className={headerStyles.sideItems} style={{backgroundColor:"#745A89"}} title="Search">
               <Link to="/search" className={headerStyles.sideItems}>
                   Search
@@ -53,10 +53,15 @@ const Header = () => {
                   }}/>
               </>
               :
-              <> 
+              <div style={{ margin: "0 1rem"}}>
+                <Button size="lg" className={headerStyles.sideItems} style={{backgroundColor:"#745A89"}} title="Profile">
+                  <Link to={`/profile?id=${loggedIn}`} className={headerStyles.sideItems}>
+                      Profile
+                  </Link>
+                </Button>
                 <LogoutButton className={headerStyles.sideItems} setLoggedIn={setLoggedIn}/>
                 <CartButton className={headerStyles.sideItems} customer_id={loggedIn}/>
-              </>
+              </div>
               }
         </div>
       </div>
