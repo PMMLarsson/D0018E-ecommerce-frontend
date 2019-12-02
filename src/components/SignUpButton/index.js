@@ -36,7 +36,7 @@ const SignUpButton = (props) => {
  }
 
  const [createCustomer] = useMutation(CREATE_CUSTOMER, {
-  variables: { fname, lname, email },
+  variables: { fname, lname, email, password },
   onCompleted: result => {
     alert(result.createCustomer.message)
     props.handleChange(result.createCustomer.id)
@@ -77,7 +77,8 @@ const SignUpButton = (props) => {
               <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email.."/>
             </FormGroup>
             <FormGroup>
-              <Label>Password</Label>
+              
+              <Label>Password {password && (password.length < 7 || password.length > 255) && <span style={{fontSize: "0.8rem"}}> must be between 7 and 255 characters long.</span>}</Label>
               <Input type="text" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password.."/>
             </FormGroup>
           </Form>
@@ -86,7 +87,7 @@ const SignUpButton = (props) => {
           <Button
             style={{backgroundColor:"#745A89"}}
             onClick={() => submit(createCustomer)}
-            disabled={!fname || !lname || !email || !password || fname.length === 0 || lname.length === 0 || email.length === 0 || password.length === 0}
+            disabled={!fname || !lname || !email || !password || fname.length === 0 || lname.length === 0 || email.length === 0 || password.length < 7 || password.legnth > 255}
           >
             <strong>Sign Up</strong>
           </Button>
