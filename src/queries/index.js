@@ -72,6 +72,7 @@ export const COMMENTS = gql`
       contents
       upvotes
       by_name
+      edited
     }
   }
 `
@@ -182,6 +183,7 @@ export const SINGLE_EMOJI_QUERY = gql`
       contents
       upvotes
       by_name
+      edited
     }
     getCustomer(id: $customer_id) {
       id

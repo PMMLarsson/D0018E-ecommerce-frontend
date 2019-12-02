@@ -16,7 +16,7 @@ const Comments = ({ comments, asset_type, by_name }) => {
       </div>
       </CardHeader>
       <CardBody>
-        {comments.map(comment => <Comment key={comment.id} comment={comment}/>)}
+        {comments.map(comment => <Comment key={comment.id} asset_type={asset_type} comment={comment}/>)}
       </CardBody>
     </Card>
     )
