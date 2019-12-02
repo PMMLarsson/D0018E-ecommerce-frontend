@@ -34,9 +34,10 @@ export const GET_ASSET_BY_TYPE = gql`
 `
 
 export const LOGIN = gql`
-  query login($email:String!) {
-    login(email:$email) {
+  query login($email:String!, $password: String!) {
+    login(email: $email, password: $password) {
       id
+      success
       message
     }
   }
@@ -54,9 +55,10 @@ export const GET_CUSTOMER = gql`
 `
 
 export const CREATE_CUSTOMER = gql`
-  mutation createCustomer($fname:String!, $lname:String!, $email:String!) {
-    createCustomer(fname:$fname, lname:$lname, email:$email) {
+  mutation createCustomer($fname: String!, $lname: String!, $email: String!, $password: String!) {
+    createCustomer(fname: $fname, lname: $lname, email: $email, password: $password) {
       id
+      success
       message
     }
   }
