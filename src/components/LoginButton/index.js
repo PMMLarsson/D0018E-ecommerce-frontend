@@ -32,8 +32,12 @@ const LoginButton = (props) => {
       if(data.login.success) {
         localStorage.setItem("loggedIn", data.login.id)
         props.handleChange(data.login.id)
+        if(data.login.isAdmin) {
+          localStorage.setItem("isAdmin", data.login.isAdmin)
+        }
         toggleModal(!modal)
         window.location.reload()
+        
       }
     })
     .catch(error => {

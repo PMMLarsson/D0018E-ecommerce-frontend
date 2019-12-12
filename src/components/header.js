@@ -61,6 +61,7 @@ const Header = () => {
                 </Button>
                 <LogoutButton className={headerStyles.sideItems} setLoggedIn={setLoggedIn}/>
                 <CartButton className={headerStyles.sideItems} customer_id={loggedIn}/>
+                {localStorage.getItem("isAdmin") && <strong>ADMIN</strong>}
               </div>
               }
         </div>

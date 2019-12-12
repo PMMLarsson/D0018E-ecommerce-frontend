@@ -17,7 +17,6 @@ export const CheckoutContent = () => {
   const assets = useQuery(GET_ASSETS)
   const cart = useQuery(CART, { variables:{ customer_id:localStorage.getItem("loggedIn") } })
 
-  
   let validOrder = false
   let invalidEmoji = ""
   if(cart && assets && cart.data && assets.data && cart.data.cart && assets.data.assets) {

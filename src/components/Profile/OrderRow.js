@@ -2,7 +2,6 @@ import React from 'react'
 
 import { printOutEmojis } from "../../utils"
 
-
 export const OrderRow = ({ order }) => {
   const {id, metadata, date, total_cost, currency} = order
   return(

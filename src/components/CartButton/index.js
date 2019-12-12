@@ -14,7 +14,6 @@ const CartButton = ({ customer_id }) => {
   }
 
   return (
-    
       <Link to="/checkout" className={headerStyles.sideItems}>
         <Button size="lg" style={{backgroundColor:"#745A89"}} title="Check out">
           {data.cartSize ? data.cartSize : ""} <span role="img" aria-label="Shopping Cart">🛒</span>

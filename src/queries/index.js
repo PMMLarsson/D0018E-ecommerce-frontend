@@ -34,10 +34,11 @@ export const GET_ASSET_BY_TYPE = gql`
 `
 
 export const LOGIN = gql`
-  query login($email:String!, $password: String!) {
+  query login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      id
-      success
+      id,
+      success,
+      isAdmin,
       message
     }
   }
@@ -197,23 +198,38 @@ export const SINGLE_EMOJI_QUERY = gql`
 `
 
 export const PROFILE_PAGE_QUERY = gql`
-query profilePage($id: ID!) {
-  getCustomer(id: $id) {
-    id
-    fname
-    lname
-    email
-  }
-  orders(id: $id) {
-    id
-    buyer
-    metadata {
-      asset_type
-      amount
+  query profilePage($id: ID!) {
+    getCustomer(id: $id) {
+      id
+      fname
+      lname
+      email
     }
-    date
-    total_cost
-    currency
+    orders(id: $id) {
+      id
+      buyer
+      metadata {
+        asset_type
+        amount
+      }
+      date
+      total_cost
+      currency
+    }
   }
-}
+`
+
+export const IS_ADMIN_QUERY = gql`
+  query isAdmin($id:ID!){
+    isAdmin(id: $id)
+  }
+`
+
+export const EDIT_EMOJI = gql`
+  mutation editAsset($type: String!, $amount: Int!, $cost: Int!, $currency: String!, $description: String) {
+    editAsset(type: $type, amount: $amount, cost: $cost, currency: $currency, description: $description){
+      success
+      message
+    }
+  }
 `
