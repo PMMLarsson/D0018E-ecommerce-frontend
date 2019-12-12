@@ -77,7 +77,6 @@ const SignUpButton = (props) => {
               <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email.."/>
             </FormGroup>
             <FormGroup>
-              
               <Label>Password {password && (password.length < 7 || password.length > 255) && <span style={{fontSize: "0.8rem"}}> must be between 7 and 255 characters long.</span>}</Label>
               <Input type="text" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password.."/>
             </FormGroup>

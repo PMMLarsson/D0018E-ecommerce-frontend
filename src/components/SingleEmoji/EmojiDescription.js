@@ -4,6 +4,7 @@ import {Card, CardBody, CardHeader, Input, Button} from "reactstrap"
 
 import { EMOJIS } from "../enums"
 import { UPDATE_GRADE, SINGLE_EMOJI_QUERY } from "../../queries"
+import EditEmojiButton from "./EditEmojiButton"
 
 const EmojiDescription = ({ emoji, grade }) => {
   const [newGrade, setNewGrade] = useState(0)
@@ -14,7 +15,19 @@ const EmojiDescription = ({ emoji, grade }) => {
   
   return (
     <Card>
-      <CardHeader>Emoji</CardHeader>
+      <CardHeader>
+        <div style={{ display: "flex", alignItems: "center"}}>
+          Emoji
+          {localStorage.getItem("isAdmin") &&
+            <div style={{ marginRight: "0", marginLeft: "auto" }}>
+              <EditEmojiButton style={{ marginLeft:"auto", marginRight:"0" }}
+              asset_type={emoji.type}
+              amount={emoji.amount}
+              cost={emoji.cost}
+              description={emoji.description}/>
+            </div>}
+        </div>
+      </CardHeader>
       <CardBody>
         <div style={{display:"flex"}}>
           <div>

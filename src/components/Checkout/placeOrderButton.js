@@ -2,8 +2,9 @@ import React from "react"
 import { Button } from "reactstrap"
 import { useMutation } from '@apollo/react-hooks';
 
-import { CREATE_ORDER, CART, CART_SIZE } from "../../queries"
+import { CREATE_ORDER, CART, CART_SIZE, GET_ASSETS, PROFILE_PAGE_QUERY } from "../../queries"
 import { printOutEmojis } from "../../utils"
+
 export const PlaceOrderButton = ({ validOrder, contents, total_cost, currency }) => {
   
   const submit = (placeOrder) => {
@@ -19,7 +20,9 @@ export const PlaceOrderButton = ({ validOrder, contents, total_cost, currency })
     variables: { customer_id:localStorage.getItem("loggedIn"), metadata, total_cost, currency },
     onCompleted: (result) => {alert("Thank you for your order:\n" + printOutEmojis(metadata) + `\n Your total was: ${total_cost} ${currency}` )},
     onError: (error) => {alert(error)},
-    refetchQueries: [{ query: CART_SIZE, variables: { customer_id: localStorage.getItem("loggedIn") } }, { query: CART, variables: { customer_id: localStorage.getItem("loggedIn") } }]
+    refetchQueries: [{ query: CART_SIZE, variables: { customer_id: localStorage.getItem("loggedIn") } }, { query: CART, variables: { customer_id: localStorage.getItem("loggedIn") } },
+    { query: GET_ASSETS },
+    { query: PROFILE_PAGE_QUERY, variables: { id: localStorage.getItem("loggedIn") } }]
   })
 
   if(!localStorage.getItem("loggedIn") || localStorage.getItem("loggedIn") === "undefined") {

@@ -3,5 +3,10 @@ export const EMOJIS = {
   SAD: "😔",
   CONFUSED: "😕",
   AIRPLANE: "✈️",
+  HEART: "❤️",
+  SOCCER_BALL: "⚽",
+  CHRISTMAS_TREE: "🎄",
+  PINEAPPLE: "🍍",
+  CROISSANT: "🥐",
 
 }
