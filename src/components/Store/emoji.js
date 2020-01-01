@@ -17,7 +17,7 @@ const Emoji = ({ asset, cart }) => {
       alert("no valid customer id!")
       return
     }
-    const {result, nr_of_items} = updateCartObject(cart.contents, asset.type, amountToAdd)
+    const {result, nr_of_items} = updateCartObject(cart.contents, asset.type, amountToAdd, asset.cost)
     addToCart({ variables: { customer_id: parseInt(localStorage.getItem("loggedIn")), contents: result, total_amount:nr_of_items } })
  }
 

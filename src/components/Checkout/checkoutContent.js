@@ -40,17 +40,16 @@ export const CheckoutContent = () => {
           </thead>
           <tbody>
         {cart.data.cart.contents[0] && cart.data.cart.contents[0].asset_type && cart.data.cart.contents.map(content => {
-          const [{ cost, currency }] = assets.data.assets.filter(asset => asset.type === content.asset_type)
-          const total_cost = cost * content.amount
+          const total_cost = content.cost * content.amount
           order_cost = order_cost + total_cost
           return(
             <CheckoutRow
               assets={assets.data.assets}
               key={content.asset_type} 
               content={content} 
-              cost={cost} 
+              cost={content.cost} 
               total_cost={total_cost} 
-              currency={currency} 
+              currency='SEK' 
               contents={cart.data.cart.contents}/>
           )
         })}

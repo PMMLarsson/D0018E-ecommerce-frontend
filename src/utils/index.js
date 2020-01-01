@@ -1,7 +1,7 @@
 import { EMOJIS } from "../components/enums"
 
 // Utility creating a new cart object when adding / deleting emojis.
-export const updateCartObject = (cart, toBeAdded, amount) => {
+export const updateCartObject = (cart, toBeAdded, amount, cost) => {
   let nr_of_items = 0
   let addedObject = false
   let result = []
@@ -10,30 +10,31 @@ export const updateCartObject = (cart, toBeAdded, amount) => {
   // with values asset_type: null, amount: null
   if(cart.length === 1 && !cart[0].asset_type) {
     nr_of_items = nr_of_items + parseInt(amount)
-    result.push({asset_type:toBeAdded, amount:parseInt(amount)})
+    result.push({asset_type:toBeAdded, amount:parseInt(amount), cost})
     return { result, nr_of_items }
   }
 
   for(let i = 0; i < cart.length; i++) {
     if(cart[i].asset_type === toBeAdded) {
       cart[i].amount = parseInt(cart[i].amount) + parseInt(amount)
+     
       addedObject = true
       if(cart[i].amount < 1) {
 
       } else {
         nr_of_items = nr_of_items + parseInt(cart[i].amount)
-        result.push({asset_type:cart[i].asset_type, amount: parseInt(cart[i].amount)})
+        result.push({asset_type:cart[i].asset_type, amount: parseInt(cart[i].amount), cost})
       }
     } else {
       nr_of_items = nr_of_items + parseInt(cart[i].amount)
-      result.push({asset_type:cart[i].asset_type, amount:parseInt(cart[i].amount)})
+      result.push({asset_type:cart[i].asset_type, amount:parseInt(cart[i].amount), cost})
     }
   }
 
   // Object does not exist in cart, add a new object
   if(addedObject === false ){
     nr_of_items = nr_of_items + parseInt(amount)
-    result.push({asset_type:toBeAdded, amount:parseInt(amount)})
+    result.push({asset_type:toBeAdded, amount:parseInt(amount), cost})
   }
   return { result, nr_of_items }
 }
@@ -53,7 +54,6 @@ export const validInventory = (contents, assets) => {
       }
     }
   })
-
   return [valid, invalidEmoji]
 }
 

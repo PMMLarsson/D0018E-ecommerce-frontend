@@ -93,6 +93,7 @@ export const CART = gql`
       contents {
         asset_type
         amount
+        cost
       }
       date
       nr_of_items
@@ -230,6 +231,18 @@ export const EDIT_EMOJI = gql`
     editAsset(type: $type, amount: $amount, cost: $cost, currency: $currency, description: $description){
       success
       message
+    }
+  }
+`
+
+export const SEARCH = gql`
+  query search($input: String!) {
+    search(input: $input) {
+      type
+      amount
+      cost
+      currency
+      description
     }
   }
 `
