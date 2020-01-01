@@ -14,7 +14,7 @@ export const CheckoutRow = ({content, cost, total_cost, currency, contents}) => 
       alert("no valid customer id!")
       return
     }
-    const {result, nr_of_items} = updateCartObject(contents, content.asset_type, amount)
+    const {result, nr_of_items} = updateCartObject(contents, content.asset_type, amount, cost)
     updateCart({ variables: { customer_id: parseInt(localStorage.getItem("loggedIn")), contents: result, total_amount:nr_of_items } })
  }
 

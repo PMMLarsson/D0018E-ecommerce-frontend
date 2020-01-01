@@ -17,7 +17,6 @@ const Footer = () => {
       <div className={footerStyles.footer}>
         <div className={footerStyles.footerItem}>
           <p className={footerStyles.footerHeader}>Assistance</p>
-          <Link to="/faq" className={footerStyles.footerContent}>FAQs</Link>
           <Link to="/contact" className={footerStyles.footerContent}>Contact</Link>
         </div>
       </div>
