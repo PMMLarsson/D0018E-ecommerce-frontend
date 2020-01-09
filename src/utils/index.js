@@ -27,7 +27,7 @@ export const updateCartObject = (cart, toBeAdded, amount, cost) => {
       }
     } else {
       nr_of_items = nr_of_items + parseInt(cart[i].amount)
-      result.push({asset_type:cart[i].asset_type, amount:parseInt(cart[i].amount), cost})
+      result.push({asset_type:cart[i].asset_type, amount:parseInt(cart[i].amount), cost:cart[i].cost})
     }
   }
 
